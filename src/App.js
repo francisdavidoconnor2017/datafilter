@@ -32,23 +32,23 @@ class App extends Component {
            hoverBorderColor: 'rgba(255,99,132,1)',
            data: [345, 400, 290, 100, 26, 456, 541, 231, 300, 380, 200, 432]
          };
-      this.handleChange = this.handleChange.bind(this);
 }
 
-handleChange(value) {
+handleChange = (value) => {
   //test
   console.log(value);
   //handle inputs
   var max = value[1];
   var min = value[0];
   //TODO: Ensure state is updating correctly
-  this.setState(() => ({
+  this.setState(prevState => ({
   slideMax:max
   }));
-  this.setState(() => ({
+  this.setState(prevState => ({
   slideMin:min
   }));
   //make data transformation
+  //TODO: Investigate more efficient way to traverse
   //TODO: Handle cumulative results
   var monthlyspend = [0,0,0,0,0,0,0,0,0,0,0,0,0];
   for (var key in this.state.users.Users) {
@@ -69,7 +69,7 @@ handleChange(value) {
   //test
   console.log(monthlyspend);
   //Update chart data with filtered results
-  this.setState(() => ({
+  this.setState(prevState => ({
   data:monthlyspend
   }));
 };
