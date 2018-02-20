@@ -18,6 +18,9 @@ class App extends Component {
       4000: '4000',
       5000: 'Max'
     };
+
+    this.initialSlide=[1000,3000]
+    ;
     this.state = {
            users: {Users},
            incremental: 5,
@@ -30,8 +33,13 @@ class App extends Component {
            borderWidth: 1,
            hoverBackgroundColor: 'rgba(25,99,132,0.4)',
            hoverBorderColor: 'rgba(255,99,132,1)',
-           data: [345, 400, 290, 100, 26, 456, 541, 231, 300, 380, 200, 432]
+           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
          };
+
+}
+
+componentDidMount() {
+    this.handleChange(this.initialSlide);
 }
 
 handleChange = (value) => {
@@ -73,6 +81,7 @@ handleChange = (value) => {
   data:monthlyspend
   }));
 };
+
 
   render() {
     return (
