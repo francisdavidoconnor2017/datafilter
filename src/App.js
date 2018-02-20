@@ -17,7 +17,7 @@ class App extends Component {
       5000: 'Max'
     };
 
-    this.initialSlide=[1000,3000]
+    this.initialSlide=[1000,3000];
     ;
     this.state = {
            users: {Users},
@@ -31,7 +31,8 @@ class App extends Component {
            borderWidth: 1,
            hoverBackgroundColor: 'rgba(25,99,132,0.4)',
            hoverBorderColor: 'rgba(255,99,132,1)',
-           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+           data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           cumulative: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
          };
 
 }
@@ -44,8 +45,8 @@ componentDidMount() {
 transform = () => {
   //make data transformation
   //TODO: Investigate more efficient way to traverse
-  //TODO: Handle cumulative results
   var monthlyspend = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+  var cumulative = monthlyspend.slice(1);
   for (var key in this.state.users.Users) {
     if (!this.state.users.Users.hasOwnProperty(key)) continue;
       var obj = this.state.users.Users[key];
@@ -61,11 +62,16 @@ transform = () => {
         }
       }
   monthlyspend=monthlyspend.slice(1);
+  monthlyspend.reduce(function(a,b,i) { return cumulative[i] = a+b; },0);
   //test
   console.log(monthlyspend);
+  console.log(cumulative);
   //Update chart data with filtered results
   this.setState(prevState => ({
   data:monthlyspend
+  }));
+  this.setState(prevState => ({
+  cumulative:cumulative
   }));
 };
 
