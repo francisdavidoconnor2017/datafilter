@@ -5,8 +5,6 @@ import Slider from 'antd/lib/slider';
 import 'antd/dist/antd.css';
 import Chart from './components/Chart';
 
-//TODO: Refactor this out into different components and functions
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -39,22 +37,11 @@ class App extends Component {
 }
 
 componentDidMount() {
-    this.handleChange(this.initialSlide);
+    this.handleSlideChange(this.initialSlide);
 }
 
-handleChange = (value) => {
-  //test
-  console.log(value);
-  //handle inputs
-  var max = value[1];
-  var min = value[0];
-  //TODO: Ensure state is updating correctly
-  this.setState(prevState => ({
-  slideMax:max
-  }));
-  this.setState(prevState => ({
-  slideMin:min
-  }));
+
+transform = () => {
   //make data transformation
   //TODO: Investigate more efficient way to traverse
   //TODO: Handle cumulative results
@@ -83,6 +70,23 @@ handleChange = (value) => {
 };
 
 
+handleSlideChange = (value) => {
+  //test
+  console.log(value);
+  //handle inputs
+  var max = value[1];
+  var min = value[0];
+  //TODO: Ensure state is updating correctly
+  this.setState(prevState => ({
+  slideMax:max
+  }));
+  this.setState(prevState => ({
+  slideMin:min
+  }));
+  this.transform();
+};
+
+
   render() {
     return (
       <div className="App">
@@ -90,7 +94,7 @@ handleChange = (value) => {
           <h1 className="App-title">Data Filtering Application</h1>
         </header>
         <div>
-        <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={100} min={0} max={5000} marks={this.marks} onChange={this.handleChange} />
+        <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={100} min={0} max={5000} marks={this.marks} onChange={this.handleSlideChange} />
         <Chart data={this.state} />
         </div>
       </div>
