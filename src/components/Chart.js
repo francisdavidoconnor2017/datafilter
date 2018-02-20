@@ -67,7 +67,7 @@ class Chart extends Component {
           data={{
           datasets: [{
           type: 'line',
-          label: 'Monthly Spend Distribution',
+          label: 'Monthly Users',
           data: transformation,
           fill: false,
           backgroundColor: '#11B34C',
@@ -78,7 +78,7 @@ class Chart extends Component {
           pointHoverBorderColor: '#EC9320',
           yAxisID: 'y-axis-1'
           },{
-          label: 'Cumulative Spend Distribution',
+          label: 'Cumulative Spend',
           type:'bar',
           data: cumulative,
           fill: false,
