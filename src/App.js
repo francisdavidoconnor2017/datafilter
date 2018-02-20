@@ -45,12 +45,12 @@ componentDidMount() {
 transform = () => {
   //make data transformation
   //TODO: Investigate more efficient way to traverse
-  var monthlyspend = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-  var cumulative = monthlyspend.slice(1);
+  let monthlyspend = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+  let cumulative = monthlyspend.slice(1);
   for (var key in this.state.users.Users) {
     if (!this.state.users.Users.hasOwnProperty(key)) continue;
-      var obj = this.state.users.Users[key];
-        for (var propt in obj) {
+      let obj = this.state.users.Users[key];
+        for (let propt in obj) {
           if(!obj.hasOwnProperty(propt)) continue;
           if (propt === 'birthday') {
             //User filtering results applied
@@ -63,9 +63,6 @@ transform = () => {
       }
   monthlyspend=monthlyspend.slice(1);
   monthlyspend.reduce(function(a,b,i) { return cumulative[i] = a+b; },0);
-  //test
-  console.log(monthlyspend);
-  console.log(cumulative);
   //Update chart data with filtered results
   this.setState(prevState => ({
   data:monthlyspend
@@ -77,19 +74,22 @@ transform = () => {
 
 
 handleSlideChange = (value) => {
-  //test
-  console.log(value);
   //handle inputs
   var max = value[1];
   var min = value[0];
   //TODO: Ensure state is updating correctly
-  this.setState(prevState => ({
-  slideMax:max
-  }));
-  this.setState(prevState => ({
-  slideMin:min
-  }));
-  this.transform();
+
+  this.setState(state => {
+      state.slideMax = max;
+   }, ()=>{
+     this.transform();
+   });
+
+   this.setState(state => {
+       state.slideMin = min;
+    }, ()=>{
+      this.transform();
+    });
 };
 
 

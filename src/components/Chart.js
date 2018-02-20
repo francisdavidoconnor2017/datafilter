@@ -57,12 +57,6 @@ yAxes: [
 
 class Chart extends Component {
 
-  constructor(props){
-    super(props);
-    console.log (this.props.data.data);
-    console.log (this.props.data.cumulative);
-  }
-
   render() {
     const transformation = this.props.data.data;
     const cumulative = this.props.data.cumulative;
