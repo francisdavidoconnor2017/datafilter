@@ -4,6 +4,7 @@ import Users from './data/Users';
 import Slider from 'antd/lib/slider';
 import 'antd/dist/antd.css';
 import Chart from './components/Chart';
+import Tabulate from './components/Tabulate';
 import { Radio } from 'antd';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -37,7 +38,8 @@ class App extends Component {
            hoverBackgroundColor: 'rgba(25,99,132,0.4)',
            hoverBorderColor: 'rgba(255,99,132,1)',
            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-           cumulative: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+           cumulative: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           tabledata: []
          };
 
 }
@@ -50,12 +52,14 @@ componentDidMount() {
 transform = () => {
   //make data transformation
   //TODO: Investigate more efficient way to traverse
-  console.log(this.state.regionValue);
+
   let usercount = [0,0,0,0,0,0,0,0,0,0,0,0,0];
   let monthlyspend = [0,0,0,0,0,0,0,0,0,0,0,0,0];
   let cumulative = monthlyspend.slice(1);
   let genderTrip = false;
   let regionTrip = false;
+  let counter=1;
+  let months = ['none', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   for (var key in this.state.users.Users) {
     if (!this.state.users.Users.hasOwnProperty(key)) continue;
       let obj = this.state.users.Users[key];
@@ -64,13 +68,13 @@ transform = () => {
         for (let propt in obj) {
           if(!obj.hasOwnProperty(propt)) continue;
           if (propt === 'gender' && this.state.genderValue !== 'Both'){
-            if (this.state.genderValue === obj['gender']){
+            if (this.state.genderValue !== obj['gender']){
                   genderTrip = true;
                   continue;
                 }
           }
           if (propt === 'region' && this.state.regionValue !== 'All'){
-            if (this.state.regionValue === obj['region']){
+            if (this.state.regionValue !== obj['region']){
                   regionTrip = true;
                   continue;
                 }
@@ -79,6 +83,10 @@ transform = () => {
             if (obj['spend'] <= this.state.slideMax && obj['spend'] >= this.state.slideMin){
               monthlyspend[obj['birthday']]+=this.state.incremental;
               usercount[obj['birthday']]+=1;
+              obj['key']=counter;
+              obj['birthmonth']=months[obj['birthday']];
+              counter++;
+              this.state.tabledata.push(obj);
             }
           }
         }
@@ -103,12 +111,14 @@ handleSlideChange = (value) => {
 
   this.setState(state => {
       state.slideMax = max;
+      state.tabledata = [];
    }, ()=>{
      this.transform();
    });
 
    this.setState(state => {
        state.slideMin = min;
+       state.tabledata = [];
     }, ()=>{
       this.transform();
     });
@@ -117,6 +127,7 @@ handleSlideChange = (value) => {
 handleGenderChange = (e) => {
   this.setState(state => {
       state.genderValue = e.target.value;
+      state.tabledata = [];
    }, ()=>{
      this.transform();
    });
@@ -125,6 +136,7 @@ handleGenderChange = (e) => {
 handleRegionChange = (e) => {
   this.setState(state => {
       state.regionValue = e.target.value;
+      state.tabledata = [];
    }, ()=>{
      this.transform();
    });
@@ -154,7 +166,8 @@ handleRegionChange = (e) => {
                 <RadioButton value="United States">United States</RadioButton>
               </RadioGroup>
           </div>
-        <Chart data={this.state} />
+        <Chart users={this.state.data} cumulative={this.state.cumulative} />
+        <Tabulate data={this.state.tabledata}/>
         </div>
       </div>
     );

@@ -58,8 +58,8 @@ yAxes: [
 class Chart extends Component {
 
   render() {
-    const transformation = this.props.data.data;
-    const cumulative = this.props.data.cumulative;
+    const users = this.props.users;
+    const cumulative = this.props.cumulative;
     return (
       <div>
         <h2>Spend Adjustment Report</h2>
@@ -68,7 +68,7 @@ class Chart extends Component {
           datasets: [{
           type: 'line',
           label: 'Monthly Users',
-          data: transformation,
+          data: users,
           fill: false,
           backgroundColor: '#11B34C',
           borderColor: '#11B37C',
