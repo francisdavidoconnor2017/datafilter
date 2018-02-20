@@ -95,6 +95,8 @@ class Chart extends Component {
           yAxisID: 'y-axis-1'
           }]
           }}
+          width={100}
+          height={30}
           options={options}
         />
       </div>
