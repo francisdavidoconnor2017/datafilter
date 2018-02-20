@@ -72,27 +72,27 @@ class Chart extends Component {
         <Bar
           data={{
           datasets: [{
-          label: 'Cumulative Spend Distribution',
-          type:'line',
-          data: cumulative,
-          fill: false,
-          borderColor: '#EC932F',
-          backgroundColor: '#EC932F',
-          pointBorderColor: '#EC932F',
-          pointBackgroundColor: '#EC932F',
-          pointHoverBackgroundColor: '#EC932F',
-          pointHoverBorderColor: '#EC932F',
-          yAxisID: 'y-axis-2'
-          },{
-          type: 'bar',
+          type: 'line',
           label: 'Monthly Spend Distribution',
           data: transformation,
           fill: false,
-          backgroundColor: '#71B37C',
-          borderColor: '#71B37C',
-          hoverBackgroundColor: '#71B37C',
-          hoverBorderColor: '#71B37C',
+          backgroundColor: '#11B34C',
+          borderColor: '#11B37C',
+          pointBorderColor: '#EC9320',
+          pointBackgroundColor: '#EC9320',
+          pointHoverBackgroundColor: '#EC9320',
+          pointHoverBorderColor: '#EC9320',
           yAxisID: 'y-axis-1'
+          },{
+          label: 'Cumulative Spend Distribution',
+          type:'bar',
+          data: cumulative,
+          fill: false,
+          borderColor: '#93932F',
+          backgroundColor: '#A3C38F',
+          hoverBackgroundColor: '#B3B37C',
+          hoverBorderColor: '#B3B37C',
+          yAxisID: 'y-axis-2'
           }]
           }}
           width={100}
