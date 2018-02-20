@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Table } from 'antd';
 
 const columns = [{
-  title: 'Key',
-  dataIndex: 'key',
-  key: 'key'
-},
-  {
   title: 'Original Index',
   dataIndex: 'index',
   key: 'index'

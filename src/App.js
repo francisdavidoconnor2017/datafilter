@@ -48,7 +48,6 @@ componentDidMount() {
     this.handleSlideChange(this.initialSlide);
 }
 
-
 transform = () => {
   //make data transformation
   //TODO: Investigate more efficient way to traverse
@@ -58,7 +57,6 @@ transform = () => {
   let cumulative = monthlyspend.slice(1);
   let genderTrip = false;
   let regionTrip = false;
-  let counter=1;
   let months = ['none', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   for (var key in this.state.users.Users) {
     if (!this.state.users.Users.hasOwnProperty(key)) continue;
@@ -83,9 +81,7 @@ transform = () => {
             if (obj['spend'] <= this.state.slideMax && obj['spend'] >= this.state.slideMin){
               monthlyspend[obj['birthday']]+=this.state.incremental;
               usercount[obj['birthday']]+=1;
-              obj['key']=counter;
               obj['birthmonth']=months[obj['birthday']];
-              counter++;
               this.state.tabledata.push(obj);
             }
           }
