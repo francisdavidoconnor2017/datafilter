@@ -48,6 +48,16 @@ componentDidMount() {
     this.handleSlideChange(this.initialSlide);
 }
 
+guid = () => {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+
 transform = () => {
   //make data transformation
   //TODO: Investigate more efficient way to traverse
@@ -58,7 +68,7 @@ transform = () => {
   let genderTrip = false;
   let regionTrip = false;
   let months = ['none', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  for (let key in this.state.users.Users) {
+  for (var key in this.state.users.Users) {
     if (!this.state.users.Users.hasOwnProperty(key)) continue;
       let obj = this.state.users.Users[key];
         genderTrip = false;
@@ -81,6 +91,7 @@ transform = () => {
             if (obj['spend'] <= this.state.slideMax && obj['spend'] >= this.state.slideMin){
               monthlyspend[obj['birthday']]+=this.state.incremental;
               usercount[obj['birthday']]+=1;
+              obj['key']=obj['']
               obj['birthmonth']=months[obj['birthday']];
               this.state.tabledata.push(obj);
             }
@@ -120,18 +131,18 @@ handleSlideChange = (value) => {
     });
 };
 
-handleGenderChange = (e) => {
+handleGenderChange = (value) => {
   this.setState(state => {
-      state.genderValue = e.target.value;
+      state.genderValue = value;
       state.tabledata = [];
    }, ()=>{
      this.transform();
    });
 }
 
-handleRegionChange = (e) => {
+handleRegionChange = (value) => {
   this.setState(state => {
-      state.regionValue = e.target.value;
+      state.regionValue = value;
       state.tabledata = [];
    }, ()=>{
      this.transform();
@@ -147,14 +158,14 @@ handleRegionChange = (e) => {
         <div>
         <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={100} min={0} max={5000} marks={this.marks} onChange={this.handleSlideChange} />
           <div>
-             <RadioGroup onChange={this.handleGenderChange} defaultValue="Both">
+             <RadioGroup onChange={event => this.handleGenderChange(event.target.value)} defaultValue="Both">
                 <RadioButton value="Male">Male</RadioButton>
                 <RadioButton value="Female">Female</RadioButton>
                 <RadioButton value="Both">Both</RadioButton>
               </RadioGroup>
           </div>
           <div>
-              <RadioGroup onChange={this.handleRegionChange} defaultValue="All">
+              <RadioGroup onChange={event => this.handleRegionChange(event.target.value)} defaultValue="All">
                 <RadioButton value="All">All</RadioButton>
                 <RadioButton value="APAC">APAC</RadioButton>
                 <RadioButton value="Europe">Europe</RadioButton>
