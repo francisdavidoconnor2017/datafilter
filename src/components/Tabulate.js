@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Table } from 'antd';
 
 const columns = [{
@@ -24,12 +24,10 @@ const columns = [{
   key: 'gender'
 }];
 
-class Tabulate extends Component {
-  render(){
+const Tabulate = ({data}) => {
     return(
-    <Table columns={columns} dataSource={this.props.data} />
+    <Table columns={columns} dataSource={data} />
   );
-  }
 }
 
 export default Tabulate;

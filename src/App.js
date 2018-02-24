@@ -58,7 +58,7 @@ transform = () => {
   let genderTrip = false;
   let regionTrip = false;
   let months = ['none', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  for (var key in this.state.users.Users) {
+  for (let key in this.state.users.Users) {
     if (!this.state.users.Users.hasOwnProperty(key)) continue;
       let obj = this.state.users.Users[key];
         genderTrip = false;

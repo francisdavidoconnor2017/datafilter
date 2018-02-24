@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Bar} from 'react-chartjs-2';
-
 
 const options = {
 responsive: true,
@@ -54,12 +53,7 @@ yAxes: [
 }
 };
 
-
-class Chart extends Component {
-
-  render() {
-    const users = this.props.users;
-    const cumulative = this.props.cumulative;
+const Chart = ({users, cumulative}) => {
     return (
       <div>
         <h2>Spend Adjustment Report</h2>
@@ -95,7 +89,6 @@ class Chart extends Component {
         />
       </div>
     );
-  }
 };
 
 export default Chart;
