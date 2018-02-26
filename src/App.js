@@ -5,9 +5,7 @@ import Slider from 'antd/lib/slider';
 import 'antd/dist/antd.css';
 import Chart from './components/Chart';
 import Tabulate from './components/Tabulate';
-import { Radio } from 'antd';
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
+import RadioButtons from './components/RadioButtons';
 
 class App extends Component {
   constructor(props){
@@ -28,7 +26,9 @@ class App extends Component {
            incremental: 5,
            slideMax: 3000,
            slideMin: 1000,
+           genders:['Male', 'Female', 'Both'],
            genderValue: 'Both',
+           regions:['All', 'APAC', 'Europe', 'Latin America', 'United States'],
            regionValue: 'All',
            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
            label: 'Monthly Spend Distribution',
@@ -158,20 +158,10 @@ handleRegionChange = (value) => {
         <div>
         <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={100} min={0} max={5000} marks={this.marks} onChange={this.handleSlideChange} />
           <div>
-             <RadioGroup onChange={event => this.handleGenderChange(event.target.value)} defaultValue="Both">
-                <RadioButton value="Male">Male</RadioButton>
-                <RadioButton value="Female">Female</RadioButton>
-                <RadioButton value="Both">Both</RadioButton>
-              </RadioGroup>
+             <RadioButtons handleChange = {this.handleGenderChange} items = {this.state.genders} />
           </div>
           <div>
-              <RadioGroup onChange={event => this.handleRegionChange(event.target.value)} defaultValue="All">
-                <RadioButton value="All">All</RadioButton>
-                <RadioButton value="APAC">APAC</RadioButton>
-                <RadioButton value="Europe">Europe</RadioButton>
-                <RadioButton value="Latin America">Latin America</RadioButton>
-                <RadioButton value="United States">United States</RadioButton>
-              </RadioGroup>
+            <RadioButtons handleChange = {this.handleRegionChange} items = {this.state.regions} />
           </div>
         <Chart users={this.state.data} cumulative={this.state.cumulative} />
         <Tabulate data={this.state.tabledata}/>
