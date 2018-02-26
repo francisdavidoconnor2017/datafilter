@@ -3,9 +3,9 @@ import {Table} from 'antd';
 
 const columns = [
   {
-    title: 'Original Index',
+    title: 'key',
     dataIndex: 'index',
-    key: 'index'
+    key: 'key'
   }, {
     title: 'Spend',
     dataIndex: 'spend',

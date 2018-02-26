@@ -48,16 +48,6 @@ componentDidMount() {
     this.handleSlideChange(this.initialSlide);
 }
 
-guid = () => {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
-}
-
 transform = () => {
   //make data transformation
   //TODO: Investigate more efficient way to traverse
@@ -68,6 +58,7 @@ transform = () => {
   let genderTrip = false;
   let regionTrip = false;
   let months = ['none', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  let tabledata =[];
   for (var key in this.state.users.Users) {
     if (!this.state.users.Users.hasOwnProperty(key)) continue;
       let obj = this.state.users.Users[key];
@@ -91,14 +82,13 @@ transform = () => {
             if (obj['spend'] <= this.state.slideMax && obj['spend'] >= this.state.slideMin){
               monthlyspend[obj['birthday']]+=this.state.incremental;
               usercount[obj['birthday']]+=1;
-              obj['key']=obj['']
+              obj['key']=tabledata.length+1;
               obj['birthmonth']=months[obj['birthday']];
-              this.state.tabledata.push(obj);
+              tabledata.push(obj);
             }
           }
         }
       }
-
   monthlyspend=monthlyspend.slice(1);
   usercount=usercount.slice(1);
   monthlyspend.reduce(function(a,b,i) { return cumulative[i] = a+b; },0);
@@ -108,6 +98,9 @@ transform = () => {
   }));
   this.setState(prevState => ({
   cumulative:cumulative
+  }));
+  this.setState(prevState => ({
+  tabledata:tabledata
   }));
 };
 
