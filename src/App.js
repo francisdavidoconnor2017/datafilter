@@ -26,6 +26,9 @@ class App extends Component {
            incremental: 5,
            slideMax: 3000,
            slideMin: 1000,
+           fullMax: 5000,
+           fullMin: 0,
+           fullStep: 100,
            genders:['Male', 'Female', 'Both'],
            genderValue: 'Both',
            regions:['All', 'APAC', 'Europe', 'Latin America', 'United States'],
@@ -149,7 +152,7 @@ handleRegionChange = (value) => {
           <h1 className="App-title">Data Filtering Application</h1>
         </header>
         <div>
-        <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={100} min={0} max={5000} marks={this.marks} onChange={this.handleSlideChange} />
+        <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={this.state.step} min={this.state.fullMin} max={this.state.fullMax} marks={this.marks} onChange={this.handleSlideChange} />
           <div>
              <RadioButtons handleChange = {this.handleGenderChange} items = {this.state.genders} />
           </div>
