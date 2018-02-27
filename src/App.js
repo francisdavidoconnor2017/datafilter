@@ -100,10 +100,10 @@ transform = () => {
   data:usercount
   }));
   this.setState(prevState => ({
-  cumulative:cumulative
+  cumulative
   }));
   this.setState(prevState => ({
-  tabledata:tabledata
+  tabledata
   }));
 };
 
