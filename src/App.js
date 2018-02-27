@@ -24,11 +24,11 @@ class App extends Component {
     this.state = {
            users: {Users},
            incremental: 5,
-           slideMax: 3000,
+           slideMax: 2999,
            slideMin: 1000,
            fullMax: 5000,
            fullMin: 0,
-           fullStep: 100,
+           fullStep: 5,
            genders:['Male', 'Female', 'Both'],
            genderValue: 'Both',
            regions:['All', 'APAC', 'Europe', 'Latin America', 'United States'],
@@ -96,15 +96,11 @@ transform = () => {
   usercount=usercount.slice(1);
   monthlyspend.reduce(function(a,b,i) { return cumulative[i] = a+b; },0);
   //Update chart data with filtered results
-  this.setState(prevState => ({
-  data:usercount
-  }));
-  this.setState(prevState => ({
-  cumulative
-  }));
-  this.setState(prevState => ({
+  this.setState({
+  data:usercount,
+  cumulative,
   tabledata
-  }));
+  });
 };
 
 handleSlideChange = (value) => {
@@ -112,34 +108,39 @@ handleSlideChange = (value) => {
   var max = value[1];
   var min = value[0];
 
-  this.setState(state => {
-      state.slideMax = max;
-      state.tabledata = [];
-   }, ()=>{
+  if (max !== this.state.slideMax){
+    this.setState({
+      slideMax:max,
+      tabledata:[]
+    }, ()=>{
      this.transform();
    });
+ }
 
-   this.setState(state => {
-       state.slideMin = min;
-       state.tabledata = [];
+ if (min !== this.state.slideMin){
+   this.setState({
+       slideMin:min,
+       tabledata:[]
     }, ()=>{
       this.transform();
     });
+
 };
+}
 
 handleGenderChange = (value) => {
-  this.setState(state => {
-      state.genderValue = value;
-      state.tabledata = [];
+  this.setState({
+      genderValue:value,
+      tabledata:[]
    }, ()=>{
      this.transform();
    });
 }
 
 handleRegionChange = (value) => {
-  this.setState(state => {
-      state.regionValue = value;
-      state.tabledata = [];
+  this.setState({
+      regionValue:value,
+      tabledata:[]
    }, ()=>{
      this.transform();
    });
@@ -152,7 +153,7 @@ handleRegionChange = (value) => {
           <h1 className="App-title">Data Filtering Application</h1>
         </header>
         <div>
-        <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={this.state.step} min={this.state.fullMin} max={this.state.fullMax} marks={this.marks} onChange={this.handleSlideChange} />
+        <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={this.state.fullStep} min={this.state.fullMin} max={this.state.fullMax} marks={this.marks} onChange={this.handleSlideChange} />
           <div>
              <RadioButtons handleChange = {this.handleGenderChange} items = {this.state.genders} />
           </div>
