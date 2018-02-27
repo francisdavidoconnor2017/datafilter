@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Users from './data/Users';
-import Slider from 'antd/lib/slider';
 import 'antd/dist/antd.css';
+import Users from './data/Users';
+import StyledSlider from './components/styles/StyledSlider';
+import CenterDiv from './components/styles/CenterDiv';
+import CenterDivNarrow from './components/styles/CenterDivNarrow';
 import Chart from './components/Chart';
 import Tabulate from './components/Tabulate';
 import RadioButtons from './components/RadioButtons';
@@ -152,17 +154,17 @@ handleRegionChange = (value) => {
         <header className="App-header">
           <h1 className="App-title">Data Filtering Application</h1>
         </header>
-        <div>
-        <Slider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={this.state.fullStep} min={this.state.fullMin} max={this.state.fullMax} marks={this.marks} onChange={this.handleSlideChange} />
-          <div>
+        <CenterDiv>
+        <StyledSlider range={true} defaultValue={[this.state.slideMin, this.state.slideMax]} step={this.state.fullStep} min={this.state.fullMin} max={this.state.fullMax} marks={this.marks} onChange={this.handleSlideChange} />
+          </CenterDiv>
+          <CenterDivNarrow>
              <RadioButtons handleChange = {this.handleGenderChange} items = {this.state.genders} />
-          </div>
-          <div>
+          </CenterDivNarrow>
+          <CenterDivNarrow>
             <RadioButtons handleChange = {this.handleRegionChange} items = {this.state.regions} />
-          </div>
+          </CenterDivNarrow>
         <Chart users={this.state.data} cumulative={this.state.cumulative} />
         <Tabulate data={this.state.tabledata}/>
-        </div>
       </div>
     );
   }

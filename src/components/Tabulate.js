@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table} from 'antd';
+import InnerDiv from './styles/InnerDiv';
 
 const columns = [
   {
@@ -26,7 +27,11 @@ const columns = [
 ];
 
 const Tabulate = ({data}) => {
-  return (<Table columns={columns} dataSource={data}/>);
+  return (
+    <InnerDiv>
+      <Table columns={columns} dataSource={data}/>
+    </InnerDiv>
+  );
 }
 
 export default Tabulate;

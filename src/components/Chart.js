@@ -1,8 +1,10 @@
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
+import InnerDiv from './styles/InnerDiv';
 
 const options = {
   responsive: true,
+  maintainAspectRatio:true,
   labels: [
     'January',
     'February',
@@ -79,7 +81,7 @@ const options = {
 };
 
 const Chart = ({users, cumulative}) => {
-  return (<div>
+  return (<InnerDiv>
     <h2>Spend Adjustment Report</h2>
     <Bar data={{
         datasets: [
@@ -108,7 +110,7 @@ const Chart = ({users, cumulative}) => {
           }
         ]
       }} width={100} height={30} options={options}/>
-  </div>);
+  </InnerDiv>);
 };
 
 export default Chart;
