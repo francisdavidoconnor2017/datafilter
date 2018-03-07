@@ -1,0 +1,33 @@
+.Form-inputLine {
+	border: 1px solid #aaa;
+	width: 100%;
+	height: 30px;
+	margin: 0 5px 5px 5px;
+	padding: 5px;
+}
+
+.Form-inputLineInvalid {
+	border: 1px solid #aaa;
+	width: 100%;
+	height: 30px;
+	margin: 0 5px 5px 5px;
+	padding: 5px;
+}
+
+.Form-inputLineTicked {
+	border: 1px solid #aaa;
+	width: 100%;
+	height: 30px;
+	margin: 0 5px 5px 5px;
+	padding: 5px;
+}
+
+.Form-inputLine:focus {
+	box-shadow: 0px 0px 10px 1px #111;
+}
+.Form-inputLineInvalid:focus {
+	box-shadow: 0px 0px 10px 1px #911;
+}
+.Form-inputLineTicked:focus {
+	box-shadow: 0px 0px 10px 1px #111;
+}
